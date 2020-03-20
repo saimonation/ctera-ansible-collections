@@ -32,7 +32,6 @@ options:
   email:
     description: E-mail address of the new user
     type: str
-    default: ''
 
 requirements:
     - cterasdk
@@ -69,9 +68,10 @@ class CteraFilerFirstUser(CteraFilerBase):
         logininfo = self._ctera_filer.get('/nosession/logininfo')
 
         if logininfo.isfirstlogin:
-            self._ctera_filer.users.add_first_user(self.parameters['filer_user'], self.parameters['filer_password'], self.parameters['email'])
+            self._ctera_filer.users.add_first_user(self.parameters['filer_user'], self.parameters['filer_password'], email=self.parameters.get('email', ''))
             self.ansible_module.ctera_return_value().changed().msg('User created')
         else:
+            self._ctera_filer = self.ansible_module.ctera_filer(login=True)
             self.ansible_module.ctera_return_value().msg('First user was already created')
         self.ansible_module.ctera_return_value().put(user=self.parameters['filer_user'])
 
