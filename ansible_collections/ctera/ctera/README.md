@@ -1,4 +1,5 @@
 # Ansible Collection for CTERA
+[![Build Status](https://travis-ci.com/ctera/ctera-ansible-collections.svg?branch=master)](https://travis-ci.com/ctera/ctera-ansible-collections)
 
 This collection provides a series of Ansible modules and plugins for interacting with the [CTERA](https://www.ctera.com) Filer and Portal.
 
